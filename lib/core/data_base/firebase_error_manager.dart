@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 enum AuthResultStatus {
   successful,
   emailAlreadyExists,
@@ -13,7 +15,7 @@ enum AuthResultStatus {
 class AuthExceptionHandler {
   static handleException(e) {
     print(e.code);
-    var status;
+    AuthResultStatus status;
     switch (e.code) {
       case "invalid-email":
         status = AuthResultStatus.invalidEmail;
