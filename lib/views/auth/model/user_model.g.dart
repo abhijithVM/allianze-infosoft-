@@ -6,18 +6,18 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
+UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       customerID: json['id'] as int?,
       email: json['email'] as String?,
-      username: json['username'] as String?,
+      userName: json['userName'] as String?,
       name: json['name'] as String?,
       phone: json['phone'] as String?,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'id': instance.customerID,
       'email': instance.email,
-      'username': instance.username,
+      'userName': instance.userName,
       'name': instance.name,
       'phone': instance.phone,
     };

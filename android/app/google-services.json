@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "223665400003",
+    "project_id": "chatroomabhi",
+    "storage_bucket": "chatroomabhi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223665400003:android:5708a3534bc2158cb7da76",
+        "android_client_info": {
+          "package_name": "com.example.allianze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223665400003-u91re1mp38dd6vrr83k7n6m888lslo70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPGFCr4AKUe2FIf8WhbM1eNJK0a4DPi4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223665400003-u91re1mp38dd6vrr83k7n6m888lslo70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

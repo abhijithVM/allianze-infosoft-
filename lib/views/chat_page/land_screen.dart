@@ -1,16 +1,15 @@
 import 'package:allianze/core/assets.dart';
-
 import 'package:allianze/views/chat_page/chat_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class LandScreen extends StatefulWidget {
+  const LandScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _LandScreenState createState() => _LandScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _LandScreenState extends State<LandScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

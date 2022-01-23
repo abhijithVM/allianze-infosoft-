@@ -3,29 +3,28 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user_model.g.dart';
 
 @JsonSerializable()
-class User extends Equatable {
+class UserModel extends Equatable {
   @JsonKey(name: 'id')
   final int? customerID;
   final String? email;
-  @JsonKey(name: 'username')
-  final String? username;
+  @JsonKey(name: 'userName')
+  final String? userName;
   @JsonKey(name: 'name')
   final String? name;
   @JsonKey(name: 'phone')
   final String? phone;
 
-
-  const User( {
+  const UserModel({
     this.customerID,
     this.email,
-    this.username,
+    this.userName,
     this.name,
     this.phone,
- 
   });
 
   @override
   List<Object> get props => [];
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

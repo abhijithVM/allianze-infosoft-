@@ -1,12 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-
-import 'package:allianze/views/chat_page/home_screen.dart';
+import 'package:allianze/views/auth/signin.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- 
+
   runApp(const MyApp());
 }
 
@@ -21,8 +20,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        // scaffoldBackgroundColor: Colors.grey.shade200,
       ),
-      home: const HomeScreen(),
+      home: const SignInScreen(),
     );
   }
 }

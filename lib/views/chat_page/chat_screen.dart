@@ -9,7 +9,9 @@ class ChatScreen extends StatelessWidget {
         appBar: AppBar(),
         body: SingleChildScrollView(
           child: Column(
-            children: const [Text("data")],
+            children: const [
+              Text("data"),
+            ],
           ),
         ));
   }
