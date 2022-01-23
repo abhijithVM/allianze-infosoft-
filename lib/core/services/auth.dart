@@ -18,7 +18,7 @@ class AuthenticationMethod {
       User? _fireBaseUser = _result.user;
       return _userFromFireBaseModel(_fireBaseUser!);
     } catch (e) {
-      debugPrint(e.toString() + " authentication erorr");
+      debugPrint(e.toString() + " log-in authentication erorr");
     }
   }
 
@@ -32,7 +32,7 @@ class AuthenticationMethod {
       User? _fireBaseUser = _result.user;
       return _userFromFireBaseModel(_fireBaseUser!);
     } catch (e) {
-      debugPrint(e.toString() + " authentication erorr");
+      debugPrint(e.toString() + " sign-Up erorr");
     }
   }
 

@@ -1,6 +1,8 @@
 import 'package:allianze/core/common_widget/custom_button.dart';
 import 'package:allianze/core/common_widget/input_filed.dart';
 import 'package:allianze/core/services/auth.dart';
+import 'package:allianze/views/auth/sign_up.dart';
+import 'package:allianze/views/chat_page/land_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,16 +40,6 @@ class _SignInScreenState extends State<SignInScreen> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         TextFormField(
-                          controller: _nameControler,
-                          decoration: customInputDecoration(hint: "user name"),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return ('user name required');
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
                           controller: _mailControler,
                           decoration: customInputDecoration(hint: "email ID"),
                           validator: (val) {
@@ -82,7 +74,13 @@ class _SignInScreenState extends State<SignInScreen> {
                             },
                             label: "Sign In"),
                         CommonButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisterScreen()));
+                          },
                           label: "Create New Account",
                           color: Colors.blueGrey.shade600,
                         )
@@ -101,7 +99,12 @@ class _SignInScreenState extends State<SignInScreen> {
       _authenticationMethod
           .signInWithMailPassword(
               mail: _mailControler.text, passWord: _passControler.text)
-          .then((value) => debugPrint("signIn screen" + value.toString()));
+          .then((value) {
+        debugPrint("signIn screen ${value.uid}");
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const LandScreen()),
+            (Route<dynamic> route) => false);
+      });
       setState(() {
         _isLoading = true;
       });
