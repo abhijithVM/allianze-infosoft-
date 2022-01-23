@@ -1,4 +1,6 @@
 import 'package:allianze/core/assets.dart';
+
+import 'package:allianze/views/chat_page/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,7 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 (index) => Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const ChatScreen()));
+                        },
                         trailing: Container(
                           child: const Icon(Icons.radio_button_checked,
                               color: Colors.green),

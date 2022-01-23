@@ -1,12 +1,12 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:allianze/screen/chat_page/home_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+
+import 'package:allianze/views/chat_page/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
+ 
   runApp(const MyApp());
 }
 
