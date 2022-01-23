@@ -1,8 +1,11 @@
 import 'package:allianze/core/common_widget/custom_button.dart';
 import 'package:allianze/core/common_widget/input_filed.dart';
+import 'package:allianze/core/data_base/fire_baseapi.dart';
 import 'package:allianze/core/services/auth.dart';
+import 'package:allianze/core/services/auth_shared_pref.dart';
 import 'package:allianze/views/auth/sign_up.dart';
 import 'package:allianze/views/chat_page/land_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +22,9 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _mailControler = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-
+  final DataBaseMethods _databaseMethod = DataBaseMethods();
   final AuthenticationMethod _authenticationMethod = AuthenticationMethod();
+  QuerySnapshot? _userInfoSnap;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,11 +104,25 @@ class _SignInScreenState extends State<SignInScreen> {
           .signInWithMailPassword(
               mail: _mailControler.text, passWord: _passControler.text)
           .then((value) {
-        debugPrint("signIn screen $value");
-        widget.toggleView ?? () {};
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const LandScreen()),
-            (Route<dynamic> route) => false);
+        if (value != null) {
+          _databaseMethod.getUserByMail(_mailControler.text).then((value) {
+            _userInfoSnap = value;
+            HelperFunctions.saveUserNameSharedPreference(
+                _userInfoSnap?.docs[0]['name']);
+          });
+          debugPrint("signIn screen $value");
+          HelperFunctions.saveUserLoggedInSharedPreference(true);
+
+          HelperFunctions.saveUserEmailSharedPreference(_mailControler.text);
+          widget.toggleView ?? () {};
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const LandScreen()),
+              (Route<dynamic> route) => false);
+        } else {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       });
       setState(() {
         _isLoading = true;

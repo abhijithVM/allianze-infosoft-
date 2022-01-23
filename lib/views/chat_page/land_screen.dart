@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_string_escapes
 
 import 'package:allianze/core/assets.dart';
 import 'package:allianze/core/common_widget/authenticate.dart';
 import 'package:allianze/core/common_widget/search_bar.dart';
 import 'package:allianze/core/data_base/fire_baseapi.dart';
 import 'package:allianze/core/services/auth.dart';
+import 'package:allianze/core/services/auth_shared_pref.dart';
 import 'package:allianze/views/chat_page/chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _LandScreenState extends State<LandScreen> {
   @override
   void initState() {
     searchTrigger("a");
+    getInfo();
     super.initState();
   }
 
@@ -31,9 +33,18 @@ class _LandScreenState extends State<LandScreen> {
     });
   }
 
-  initiateChatMethod(String userNmae) {
-    List<String> users = [userNmae, "userNmae"];
-    _databaseMethod.createChat(userNmae, "myName");
+  getInfo() async => Constants.myName =
+      (await HelperFunctions.getUserNameSharedPreference()) ?? "";
+  _createChatRoomAndConversation(String userNmae) {
+    String chatRoomId = getChatRoomId(userNmae, Constants.myName);
+    List<String> users = [userNmae, Constants.myName];
+    Map<String, dynamic> chatRoomMap = {
+      "users": users,
+      "chat_roomID": chatRoomId
+    };
+    _databaseMethod.createChat(chatRoomId, chatRoomMap);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const ChatScreen()));
   }
 
   final AuthenticationMethod _authenticationMethod = AuthenticationMethod();
@@ -84,10 +95,8 @@ class _LandScreenState extends State<LandScreen> {
                       padding: const EdgeInsets.only(top: 8.0),
                       child: ListTile(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ChatScreen()));
+                          _createChatRoomAndConversation(
+                              "${searchedList!.docs[index]['name']}");
                         },
                         trailing: Chip(
                             backgroundColor: Colors.green,
@@ -154,5 +163,13 @@ class _LandScreenState extends State<LandScreen> {
             ),
           ),
         ));
+  }
+}
+
+getChatRoomId(String a, String b) {
+  if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+    return "$b\_$a";
+  } else {
+    return "$a\_$b";
   }
 }

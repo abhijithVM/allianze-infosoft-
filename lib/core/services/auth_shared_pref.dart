@@ -39,3 +39,9 @@ class HelperFunctions {
     return preferences.getString(sharedPreferenceUserEmailKey);
   }
 }
+
+
+class Constants{
+
+  static String myName = "";
+}
