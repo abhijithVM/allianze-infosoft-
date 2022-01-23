@@ -18,11 +18,20 @@ class LandScreen extends StatefulWidget {
 }
 
 class _LandScreenState extends State<LandScreen> {
+  String storedUserName = Constants.myName;
   @override
   void initState() {
-    searchTrigger("a");
+    getAllUsers();
     getInfo();
     super.initState();
+  }
+
+  void getAllUsers() {
+    _databaseMethod.getAllRegisteredUser().then((value) {
+      setState(() {
+        searchedList = value;
+      });
+    });
   }
 
   void searchTrigger(String query) {
@@ -33,18 +42,20 @@ class _LandScreenState extends State<LandScreen> {
     });
   }
 
-  getInfo() async => Constants.myName =
+  getInfo() async => storedUserName =
       (await HelperFunctions.getUserNameSharedPreference()) ?? "";
   _createChatRoomAndConversation(String userNmae) {
-    String chatRoomId = getChatRoomId(userNmae, Constants.myName);
-    List<String> users = [userNmae, Constants.myName];
+    String chatRoomId = getChatRoomId(userNmae, storedUserName);
+    List<String> users = [userNmae, storedUserName];
     Map<String, dynamic> chatRoomMap = {
       "users": users,
       "chat_roomID": chatRoomId
     };
     _databaseMethod.createChat(chatRoomId, chatRoomMap);
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const ChatScreen()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => ChatScreen(storedUserName: storedUserName)));
   }
 
   final AuthenticationMethod _authenticationMethod = AuthenticationMethod();
@@ -65,6 +76,7 @@ class _LandScreenState extends State<LandScreen> {
           actions: [
             IconButton(
                 onPressed: () {
+                  HelperFunctions.saveUserLoggedInSharedPreference(false);
                   _authenticationMethod.signOutAccount();
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => Authenticate()),

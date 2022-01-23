@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+  final String? storedUserName;
+  const ChatScreen({Key? key, this.storedUserName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,8 +10,8 @@ class ChatScreen extends StatelessWidget {
         appBar: AppBar(),
         body: SingleChildScrollView(
           child: Column(
-            children: const [
-              Text("data"),
+            children: [
+              Text("$storedUserName"),
             ],
           ),
         ));

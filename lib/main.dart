@@ -30,23 +30,17 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'chat room',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        // scaffoldBackgroundColor: Colors.grey.shade200,
-      ),
-      home: userIsLoggedIn
-          ? userIsLoggedIn
-              ? LandScreen()
-              : Authenticate()
-          : Center(
-              child: Authenticate(),
-            ),
+        debugShowCheckedModeBanner: false,
+        title: 'chat room',
+        theme: ThemeData(
+          primaryColor: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          // scaffoldBackgroundColor: Colors.grey.shade200,
+        ),
+        home: userIsLoggedIn ? LandScreen() : Authenticate()
 
-      // Authenticate(),
-    );
+        // Authenticate(),
+        );
   }
 
   getLoggedInState() async {

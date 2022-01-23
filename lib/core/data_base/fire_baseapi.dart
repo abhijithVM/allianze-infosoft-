@@ -27,4 +27,8 @@ class DataBaseMethods {
         .doc(chat_roomID)
         .set(chatRoomMap);
   }
+
+  getAllRegisteredUser() async {
+    return await FirebaseFirestore.instance.collection("users").get();
+  }
 }
