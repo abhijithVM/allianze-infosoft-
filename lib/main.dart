@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:allianze/core/common_widget/authenticate.dart';
 import 'package:allianze/views/auth/signin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         // scaffoldBackgroundColor: Colors.grey.shade200,
       ),
-      home: const SignInScreen(),
+      home: const Authenticate(),
     );
   }
 }

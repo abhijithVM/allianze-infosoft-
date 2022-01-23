@@ -7,14 +7,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  final Function? toggleView;
+  const SignInScreen({Key? key, this.toggleView}) : super(key: key);
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController _nameControler = TextEditingController();
   final TextEditingController _passControler = TextEditingController();
   final TextEditingController _mailControler = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -78,8 +78,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterScreen()));
+                                    builder: (context) => const RegisterScreen(
+                                        toggleView: null)));
                           },
                           label: "Create New Account",
                           color: Colors.blueGrey.shade600,
@@ -100,7 +100,8 @@ class _SignInScreenState extends State<SignInScreen> {
           .signInWithMailPassword(
               mail: _mailControler.text, passWord: _passControler.text)
           .then((value) {
-        debugPrint("signIn screen ${value.uid}");
+        debugPrint("signIn screen $value");
+        widget.toggleView ?? () {};
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const LandScreen()),
             (Route<dynamic> route) => false);

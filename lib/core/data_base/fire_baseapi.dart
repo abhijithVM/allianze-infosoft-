@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+class DataBaseMethods {
+  getUserByName(String name) async {
+ return   await FirebaseFirestore.instance
+        .collection("users")
+        .where("name", isEqualTo: name).get();
+  }
 
-// import 'package:allianze/screen/auth/model/user_model.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-
-// class FireBaseAPI {
-//   static Stream<List<User>> getUsers() =>
-//       FirebaseFirestore.instance.collection('users').orderBy(field)
-// }
+  uploadUserInfo(userMap) {
+    FirebaseFirestore.instance.collection("users").add(userMap);
+  }
+}

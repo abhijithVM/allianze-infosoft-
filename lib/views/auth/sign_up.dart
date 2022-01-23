@@ -1,12 +1,14 @@
 import 'package:allianze/core/common_widget/custom_button.dart';
 import 'package:allianze/core/common_widget/input_filed.dart';
+import 'package:allianze/core/data_base/fire_baseapi.dart';
 import 'package:allianze/core/services/auth.dart';
 import 'package:allianze/views/chat_page/land_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  final Function? toggleView;
+  const RegisterScreen({Key? key, this.toggleView}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -19,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _mailControler = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-
+  final DataBaseMethods _databaseMethod = DataBaseMethods();
   final AuthenticationMethod _authenticationMethod = AuthenticationMethod();
   @override
   Widget build(BuildContext context) {
@@ -116,6 +118,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           .signUpWithMailPassword(
               mail: _mailControler.text, passWord: _passControler.text)
           .then((value) {
+        Map<String, String> userInfoMap = {
+          "name": _nameControler.text,
+          "email": _mailControler.text,
+          "password": _passControler.text
+        };
+        _databaseMethod.uploadUserInfo(userInfoMap);
+        widget.toggleView ?? () {};
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const LandScreen()),
             (Route<dynamic> route) => false);
