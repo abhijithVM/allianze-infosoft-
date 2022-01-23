@@ -1,5 +1,4 @@
 import 'package:allianze/core/data_base/fire_baseapi.dart';
-import 'package:allianze/core/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatefulWidget {

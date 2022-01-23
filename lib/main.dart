@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:allianze/core/common_widget/authenticate.dart';
-import 'package:allianze/views/auth/signin.dart';
+import 'package:allianze/views/chat_page/land_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -17,14 +16,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'chat room',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        // scaffoldBackgroundColor: Colors.grey.shade200,
-      ),
-      home: const Authenticate(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'chat room',
+        theme: ThemeData(
+          primaryColor: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          // scaffoldBackgroundColor: Colors.grey.shade200,
+        ),
+        home: const LandScreen()
+
+        // Authenticate(),
+        );
   }
 }
