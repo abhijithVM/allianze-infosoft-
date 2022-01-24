@@ -55,7 +55,7 @@ class _LandScreenState extends State<LandScreen> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ChatScreen(storedUserName: storedUserName)));
+            builder: (context) => ChatScreen(chatScreenRoomId: chatRoomId)));
   }
 
   final AuthenticationMethod _authenticationMethod = AuthenticationMethod();
