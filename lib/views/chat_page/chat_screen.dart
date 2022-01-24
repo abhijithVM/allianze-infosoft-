@@ -17,20 +17,21 @@ class _ChatScreenState extends State<ChatScreen> {
   Stream<QuerySnapshot>? chats;
   TextEditingController messageEditingController = TextEditingController();
   final DataBaseMethods _databaseMethod = DataBaseMethods();
-  Widget chatMessages() {
+
+
+
+  Widget chatMessageList() {
     return StreamBuilder(
       stream: chats,
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(
-                itemCount: snapshot.data!.hashCode,
+                itemCount: 2,
                 itemBuilder: (context, index) {
                   return MessageTile(
                       message: snapshot.data.toString(),
                       //![index].data["message"]
-                      sendByMe: Constants.myName == snapshot.data.toString()
-                      //documents[index].data["sendBy"],
-                      );
+                      sendByMe: Constants.myName == snapshot.data.toString());
                 })
             : Container();
       },
@@ -70,7 +71,7 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(),
       body: Stack(
         children: [
-          chatMessages(),
+          chatMessageList(),
           Container(
             alignment: Alignment.bottomCenter,
             width: MediaQuery.of(context).size.width,
@@ -95,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      addMessage();
+                       addMessage();
                     },
                     child: Container(
                         height: 40,
